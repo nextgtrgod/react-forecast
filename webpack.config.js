@@ -5,7 +5,7 @@ module.exports = {
 
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'public'),
     },
 
     module: {
@@ -32,7 +32,7 @@ module.exports = {
 
     devServer: {
 		inline: true,
-		contentBase: './build',
+		contentBase: './public',
 		port: 9090,
         host: '192.168.0.100'
         // proxy: {

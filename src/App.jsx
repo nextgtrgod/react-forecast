@@ -1,6 +1,11 @@
 import React 	from 'react';
 import ReactDOM from 'react-dom';
 
+import './styles.styl';
+
+import Search from './components/Search';
+import Forecast from './components/Forecast';
+
 
 class App extends React.Component {
 	constructor(props) {
@@ -13,7 +18,21 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<h1>Дороу</h1>
+			<div className={'app'}>
+				<Search />
+
+				<Forecast
+					currentTemp={26}
+					minTemp={11}
+					maxTemp={31}
+					humidity={72}
+					windDirection={'up-right'}
+					windSpeed={'3'}
+					pressure={760}
+				/>
+
+
+			</div>
 		)
 	}
 
