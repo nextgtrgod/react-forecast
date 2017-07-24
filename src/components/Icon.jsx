@@ -16,7 +16,3 @@ function Icon(props) {
 
 
 export default Icon;
-
-//	icon =>  
-//	direction => wind
-//	status day/night; statusID
