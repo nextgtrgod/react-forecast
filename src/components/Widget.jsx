@@ -48,7 +48,7 @@ function Widget(props) {
 					status={{
 							dayTime,
 							statusID: weatherData.weather[0].id
-						}} 
+						}}
 				/>
 				<p className="status">{weatherData.weather[0].description}</p>
 			</div>
@@ -60,6 +60,9 @@ function Widget(props) {
 					<p className='temp-range'>{tempMin}..{tempMax}°</p>
 				</div>
 
+				{/* {
+					false ? <div>Hello</div> : ''
+				} */}
 				<div className="widget__info">
 					<p>
 						<Icon icon='raindrop'/>
@@ -86,7 +89,7 @@ function Widget(props) {
 			</div>
 		</div>
 	)
-}
+};
 
 
 export default Widget;

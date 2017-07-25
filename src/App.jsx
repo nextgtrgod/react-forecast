@@ -5,6 +5,7 @@ import './styles.styl';
 
 import Search from './components/Search';
 import Widget from './components/Widget';
+import parseData from './logic/parseData';
 
 import weatherData from './api/weatherData';
 
@@ -18,20 +19,16 @@ class App extends React.Component {
 		let weatherDataList = this.props.weatherData.list;
 	
 		let weatherDataNow = weatherDataList[0];
-		let weatherDataNext = [];
-
-		// weatherDataList.forEach(weatherDataListItem => {
-			
-		// });
 
 		this.state = {
 			weatherDataCity, 	// city info (id, country)
 			weatherDataNow, 	// weather data for now
-			weatherDataNext 	// array of weather data for next 5 days
+			// weatherDataNext 	// array of weather data for next 5 days
 		}
 
-		console.log(this.state.weatherDataNow);
+		console.log(parseData(this.props.weatherData));
 	}
+
 
 	render() {
 		return (
@@ -49,3 +46,7 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App weatherData={weatherData}/>, document.getElementById('root'));
+
+
+// api.openweathermap.org/data/2.5/weather?q=Moscow,ru&lang=ru&units=metric&appid=77e577e4c9e13e85b8e39f71194aea31
+// api.openweathermap.org/data/2.5/forecast?q=Moscow,ru&appid=77e577e4c9e13e85b8e39f71194aea31&lang=ru&units=metric

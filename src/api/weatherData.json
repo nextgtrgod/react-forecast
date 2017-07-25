@@ -146,7 +146,7 @@
 			},
 			"weather": [
 				{
-					"id": 800,
+					"id": 802,
 					"main": "Clear",
 					"description": "ясно",
 					"icon": "01d"
@@ -179,7 +179,7 @@
 			},
 			"weather": [
 				{
-					"id": 800,
+					"id": 802,
 					"main": "Clear",
 					"description": "ясно",
 					"icon": "02d"
