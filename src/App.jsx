@@ -5,9 +5,10 @@ import './styles.styl';
 
 import Search from './components/Search';
 import Widget from './components/Widget';
+import Forecast from './components/Forecast';
 import parseData from './logic/parseData';
 
-import weatherData from './api/weatherData';
+// import weatherData from './api/weatherData';
 
 
 
@@ -15,18 +16,60 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 
-		let weatherDataCity = this.props.weatherData.city;
-		let weatherDataList = this.props.weatherData.list;
-	
-		let weatherDataNow = weatherDataList[0];
-
 		this.state = {
-			weatherDataCity, 	// city info (id, country)
-			weatherDataNow, 	// weather data for now
-			// weatherDataNext 	// array of weather data for next 5 days
+			language: 'ru'
 		}
 
-		console.log(parseData(this.props.weatherData));
+		this.getWeatherData = this.getWeatherData.bind(this);
+	}
+
+
+	componentWillMount() {
+		if ('geolocation' in navigator) {
+			navigator.geolocation.getCurrentPosition(position => {
+				console.log(position);
+				this.getWeatherData(position.coords);
+			});
+		}
+	}
+
+	
+	getWeatherData(coords) {
+		let appID = '77e577e4c9e13e85b8e39f71194aea31';
+
+		let url = `http://api.openweathermap.org/data/2.5/forecast?` +
+					`lat=${coords.latitude}&lon=${coords.longitude}&` +
+					`lang=${this.state.language}&` +
+					`units=metric&` +
+					`appid=${appID}`;
+		
+	
+		let xhr = new XMLHttpRequest();
+
+		xhr.open('GET', url);
+
+		xhr.onload = () => {
+			if(xhr.status === 200) {
+				let json = JSON.parse(xhr.response);
+
+				if(json.cod == 200) {
+					let parsedData = parseData(json);
+
+					this.setState({
+						weatherDataNow:  parsedData.now, 	// weather data for now
+						weatherDataNext: parsedData.next, 	// array of weather data for next 5 days
+						cityData: 		 parsedData.city 	// city info (id, country)
+					})
+				} else {
+					console.log(json.cod + '\n' + json.message);
+				}
+			} else {
+				reject(xhr.statusText);
+			}
+		};
+		xhr.onerror = error => console.log(error);
+
+		xhr.send();
 	}
 
 
@@ -34,9 +77,18 @@ class App extends React.Component {
 		return (
 			<div className={'app'}>
 
-				<Search cityData={this.state.weatherDataCity} />
+				<Search data={this.state.cityData} />
 
-				<Widget weatherData={this.state.weatherDataNow} widgetType='main' />
+				{this.state.weatherDataNow &&
+					<Widget
+						data={this.state.weatherDataNow} 
+						type='big' 
+					/>
+				}
+
+				{this.state.weatherDataNext &&
+					<Forecast data={this.state.weatherDataNext} />
+				}
 
 			</div>
 		)
@@ -45,8 +97,10 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<App weatherData={weatherData}/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 // api.openweathermap.org/data/2.5/weather?q=Moscow,ru&lang=ru&units=metric&appid=77e577e4c9e13e85b8e39f71194aea31
-// api.openweathermap.org/data/2.5/forecast?q=Moscow,ru&appid=77e577e4c9e13e85b8e39f71194aea31&lang=ru&units=metric
+// api.openweathermap.org/data/2.5/forecast?q=Москва,ru&appid=77e577e4c9e13e85b8e39f71194aea31&lang=ru&units=metric
+// AIzaSyDUO2FX0I0WrBipHcGozv8_1UWNNHu_BFk
+// https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Москва&types=(cities)&key=AIzaSyDUO2FX0I0WrBipHcGozv8_1UWNNHu_BFk

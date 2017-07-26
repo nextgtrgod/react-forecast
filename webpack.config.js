@@ -34,7 +34,8 @@ module.exports = {
 		inline: true,
 		contentBase: './public',
 		port: 9090,
-        host: '192.168.0.100'
+        // host: '192.168.0.100'
+        host: 'localhost'
         // proxy: {
         //     '/api': 'http://localhost:3000'
         // }

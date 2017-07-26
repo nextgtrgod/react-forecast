@@ -5,25 +5,28 @@ function parseData(data) {
 	// helpers
 	let O = n => Math.round(n);
 
-	let timestamp = t => {
+	let convert = t => {
 		let date = new Date(t);
 		return {
-			date: 	date.getDate(),
-			month: 	date.getMonth(),
-			year: 	date.getFullYear()
+			date: 	date.getUTCDate(),
+			month: 	date.getUTCMonth(),
+			year: 	date.getUTCFullYear()
 		}
 	};
 	
+	console.log(data);
 	
 	let weatherData = [];
 
 	data.list.forEach(item => {
+		
+		let dateConverted = convert(item.dt * 1000);
 
 		let weatherDataItem = {
-			date 				: timestamp(item.dt * 1000).date,
-			month 				: timestamp(item.dt * 1000).month,
-			year 				: timestamp(item.dt * 1000).year,
-			monthName 			: local(timestamp(item.dt * 1000).month, 'month'),
+			date 				: dateConverted.date,
+			month 				: dateConverted.month,
+			year 				: dateConverted.year,
+			monthName 			: local(dateConverted.month, 'month-long', 'ru'),
 			dayTime 			: (item.sys.pod === 'd' ? 'day' : 'night'),
 			statusID 			: item.weather[0].id,
 			statusDescription  	: item.weather[0].description,
@@ -119,11 +122,13 @@ function parseData(data) {
 		forecast.push(forecastItem);
 	});
 
+	let parsedData = {
+		now:  weatherDataNow,
+		next: forecast,
+		city: data.city
+	};
 
-	console.log(forecast);
-
-
-	return weatherData;
+	return parsedData;
 };
 
 
