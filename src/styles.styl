@@ -8,11 +8,11 @@ html, body
 	margin 0
 	padding 0
 	touch-action manipulation
-	-ms-touch-action manipulation
 	-webkit-text-size-adjust none
 p
 	margin 0
 	user-select none
+	cursor default
 
 div
 	box-sizing border-box
@@ -21,57 +21,126 @@ div
 
 // Variables
 // fonts
-$font 					= {}
-$font.family 			= {}
-$font.size 				= {}
-$font.family.default 	= 'Open Sans Condensed', sans-serif
-$font.size.default		= 17px
+$font-family-default 	= 'Open Sans Condensed', sans-serif
+$font-size-default 		= 17px
 
 // colors
-$color					= {}
-$color.text				= {}
+$color-bg-main			= #FFCD01
+$color-bg-add			= #009CCB
+$color-text-main		= #5b5b5b
+$color-text-add 		= #101010
 
-$color.normal 			= #03a9f4
-$color.dark				= #0288d1
-$color.light			= #b3e5fc
-$color.accent			= #FFCD01
-
-$color.text.normal		= #212121
-$color.text.light		= #757575
-
-// rgb(0, 156, 203)
 
 
 // main
 body
-	font-family: $font.family.default
-	background-color: #5b5b5b
+	font-family: $font-family-default
+	// background-color: $color-text-main
+	background-color: #111
 	text-align center
+	.main-bg
+		position fixed
+		top 0
+		left 0
+		right 0
+		bottom 0
+		margin auto
+		z-index -1
+		max-width 120%
+		max-height 120%
+		// filter blur(2px)
+		svg
+			position absolute
+			top 0
+			left 0
+			right 0
+			bottom 0
+			margin auto
+			path
+				// transition all .4s
+				&.st0
+				&.st1
+				&.st2
+				&.st3
+				&.st4
+					opacity 0
+					animation triangles-opacity-animation 8s forwards
+					transition .8s ease-out
+					transform scale(2)
+
+
+				&.st1
+					animation-delay 1s
+					// transition-delay .05s
+					transition-duration .1s
+				&.st2
+					animation-delay 3s
+					// transition-delay .1s
+					transition-duration .2s
+				&.st3
+					animation-delay 5s
+					// transition-delay .15s
+					transition-duration .4s
+				&.st4
+					animation-delay 7s
+					// transition-delay .2s
+					transition-duration .6s
+			
+			g
+				&.lines
+					pointer-events none
+				&.triangles
+					display none
+					@media(min-width 720px)
+						display block
+
+		
+		@keyframes triangles-opacity-animation
+			0%
+				opacity 0
+			100%
+				opacity .75
+
+
 
 .search-form
 	position relative
 	display block
-	width 510px
-	margin 20px auto 30px
+	width 100%
+	margin 20px auto 35px
 	box-sizing border-box
 	&>*
 		display inline-block
 		font-size 24px
-		color #5b5b5b
-	.input-list
-		position relative
-		width 100%
+		color $color-text-main
+	&:after
+		content ''
+		position absolute
+		top 0
+		right 0
+		bottom 0
+		margin auto
+		height 90%
+		width 45px
+		background: linear-gradient(to left, #FFF, rgba(255,255,255, 0.85))
+		z-index 1
+
 	input
+		position relative
 		display block
 		width 100%
 		padding 5px 10px
 		font-size 24px
-		font-family: $font.family.default
+		font-family: $font-family-default
 		background-color #FFF
+		box-shadow 0px 0px 1px transparent
+		transition all .8s
 		border none
-		box-shadow 1px 3px 10px #111
 		box-sizing border-box
 		z-index 1
+		&[value='']
+			box-shadow 1px 3px 10px #111
+
 	button
 		position absolute
 		width 25px
@@ -99,51 +168,48 @@ body
 			margin auto
 
 
+.app
+	width 100%
+	min-width 320px
+	padding 20px
+	margin auto
+	@media(min-width 720px)
+		width 500px
+
+
 .widget
 	display block
-	margin 0 auto 20px
+	width 100%
+	margin 0 auto 10px
 	font-size 0
-	color #5b5b5b
-	background-color: $color.accent
-	border-radius 2px
+	color $color-text-main
+	background-color: $color-bg-main
+	// border-radius 2px
 	box-sizing border-box
 	box-shadow 1px 3px 10px #111
-	width 100px
-	&.big
-		width 510px
-		&>*
-			position relative
-			display inline-block
-			vertical-align top
-			padding 20px
-			font-size 0
-		&.night
-			background-color: #009CCB
-			color #101010
+	&>*
+		position relative
+		display inline-block
+		vertical-align top
+		padding 20px
+		font-size 0
+	&.night
+		// background-color: $color-bg-add
+		background: linear-gradient(to right, #009ccb, rgba(0, 246, 46, 0.9))
+		color $color-text-add
 		.widget__left
 			&:after
-				border-right 1px dashed #101010
+				border-right 1px dashed $color-text-add
 
-	&.small
-		display inline-block
-		width 94px 				// (510 - 40) / 5
-		margin-right 10px
-		&:last-of-type
-			margin-right 0
-		&>*
-			width 100%
-			padding 5px 10px 0
-			text-align left
-		&.widget__left
-			&:after
-				display none
 
-		p.temp-range
-			font-weight bold
 
 	
 	&__left
 		width 40%
+		.icon
+			font-size 95px
+			color #FFF
+			text-shadow 1px 2px 1px #212121
 		&:after
 			content ''
 			position absolute
@@ -153,7 +219,7 @@ body
 			margin auto
 			height 90%
 			width 1px
-			border-right 1px dashed #5b5b5b
+			border-right: 1px dashed $color-text-main
 	
 	&__right
 		width 60%
@@ -193,15 +259,60 @@ body
 			line-height 1
 			font-weight bold
 
-
 .icon
+	font-size 24px
 	display inline-block
-	&--big
-		display block
-		font-size 110px
-		color #FFF
-		text-shadow 1px 2px 2px #212121
-	&--small
-		font-size 25px
-		color #FFF
-		text-shadow 1px 1px 1px #212121
+	vertical-align top
+
+.forecast
+	display flex
+	justify-content space-between
+	width 100%
+	margin auto
+	&__item
+		position relative
+		width 100%
+		max-width calc(25% - 5px)
+		// margin-right 5px
+		padding 5px
+		margin-bottom 10px
+		text-align right
+		background-color: alpha($color-bg-main, .95)
+		&:before // firefox box-shadow on adjacent elements fix
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			bottom 0
+			z-index -1
+			box-shadow 1px 3px 10px #111
+
+		&:last-of-type
+			margin-right 0
+
+		.icon
+			font-size 25px
+			height 45px
+			margin-bottom 5px
+			color #FFF
+			text-shadow 1px 1px 1px #212121
+		
+		p.weekday
+			position absolute
+			font-weight bold
+			font-size 21px
+			top 0
+			left 5px
+
+		p.date
+			position absolute
+			font-size 14px
+			top 25px
+			left 5px
+			span
+				font-size 12px
+
+		p.temp-range
+			font-size 21px
+			font-weight bold

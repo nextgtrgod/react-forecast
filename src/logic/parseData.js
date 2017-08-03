@@ -1,13 +1,14 @@
-import local from './local';
 
 
-function parseData(data) {
+function parseData(data, lang = 'en') {
 	// helpers
 	let O = n => Math.round(n);
 
 	let convert = t => {
 		let date = new Date(t);
 		return {
+			hour: 	date.getUTCHours(),
+			day: 	date.getUTCDay(),
 			date: 	date.getUTCDate(),
 			month: 	date.getUTCMonth(),
 			year: 	date.getUTCFullYear()
@@ -23,11 +24,11 @@ function parseData(data) {
 		let dateConverted = convert(item.dt * 1000);
 
 		let weatherDataItem = {
+			day 				: dateConverted.day,
 			date 				: dateConverted.date,
 			month 				: dateConverted.month,
 			year 				: dateConverted.year,
-			monthName 			: local(dateConverted.month, 'month-long', 'ru'),
-			dayTime 			: (item.sys.pod === 'd' ? 'day' : 'night'),
+			dayTime 			: ((dateConverted.hour > 6 && dateConverted.hour < 21) ? 'day': 'night'),
 			statusID 			: item.weather[0].id,
 			statusDescription  	: item.weather[0].description,
 			temp 				: O(item.main.temp),
@@ -65,7 +66,23 @@ function parseData(data) {
 
 	// get current date and waetherData for that date
 	let currentDate = weatherData[0].date;
+
+	// calculate min and max for today
+	let weatherDataToday = weatherData.filter(item => item.date === currentDate);
+	let todayTempMin = weatherDataToday[0].temp;
+	let todayTempMax = weatherDataToday[0].temp;
+
+	weatherDataToday.forEach(item => {
+		if(item.temp < todayTempMin) todayTempMin = item.temp;
+		if(item.temp > todayTempMax) todayTempMax = item.temp;
+	});
+
+	weatherData[0].tempMin = todayTempMin;
+	weatherData[0].tempMax = todayTempMax;
+
+	// return complete data for now widget
 	let weatherDataNow = weatherData[0];
+
 
 	// filter other dates
 	let weatherDataNextDays = weatherData.filter(item => item.date !== currentDate);
@@ -111,9 +128,9 @@ function parseData(data) {
 		};
 
 		let forecastItem = {
+			day: 		item[0].day,
 			date: 		item[0].date,
 			month: 		item[0].month,
-			monthName: 	item[0].monthName,
 			statusID: 	mostFreqStatusID,
 			tempMin,
 			tempMax
