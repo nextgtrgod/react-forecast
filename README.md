@@ -18,3 +18,5 @@
 - [ ] svg to react component
 - [ ] mobile version without animated background
 - [ ] localStorage caching (use Open Weather Map API no more than once an hour)
+- [ ] color theme
+- [ ] use system fonts
