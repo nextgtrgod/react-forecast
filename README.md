@@ -20,3 +20,4 @@
 - [ ] localStorage caching (use Open Weather Map API no more than once an hour)
 - [ ] color theme
 - [ ] use system fonts
+- [ ] no geolocation allowed at app start scenario error: _lat undefined_
