@@ -7,3 +7,14 @@
 * [Weather Icons](https://github.com/erikflowers/weather-icons)
 
 ![react-forecast app screenshot](https://image.ibb.co/eRaKma/react_forecast_screen.jpg)
+
+
+
+#### Todo
+- [x] animated background
+- [x] autocomplete on search input
+- [x] ru/en
+- [ ] language autodetect
+- [ ] svg to react component
+- [ ] mobile version without animated background
+- [ ] localStorage caching (use Open Weather Map API no more than once an hour)
