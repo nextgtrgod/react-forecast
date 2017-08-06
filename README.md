@@ -21,3 +21,4 @@
 - [ ] color theme
 - [ ] use system fonts
 - [ ] no geolocation allowed at app start scenario error: _lat is not defined_
+- [ ] ReactCSSTransitionGroup
