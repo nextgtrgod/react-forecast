@@ -35,7 +35,7 @@ class App extends React.Component {
 
 	
 	getWeatherData = (value, searchBy) => {
-		let url = `http://api.openweathermap.org/data/2.5/forecast?` +
+		let url = `https://api.openweathermap.org/data/2.5/forecast?` +
 					`&lang=${this.state.lang}` +
 					`&units=metric` +
 					`&appid=${apiKey}`;
