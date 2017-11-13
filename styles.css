@@ -88,9 +88,9 @@ body #app {
   bottom: 0;
   margin: auto;
   height: 100%;
-  width: 45px;
-  background: -webkit-gradient(linear, right top, left top, from(#fff), to(rgba(255,255,255,0.85)));
-  background: linear-gradient(to left, #fff, rgba(255,255,255,0.85));
+  width: 50px;
+  background: -webkit-gradient(linear, right top, left top, from(#fff), to(rgba(255,255,255,0.9)));
+  background: linear-gradient(to left, #fff, rgba(255,255,255,0.9));
   z-index: 1;
 }
 .search-form input {
