@@ -1,0 +1,90 @@
+
+.search-form
+	position relative
+	margin 20px 0
+	box-shadow 1px 3px 10px rgba(17, 17, 17, .5)
+	animation fade-in .4s forwards
+	&>*
+		display inline-block
+		font-size 24px
+		color $color-text-main
+	&:after
+		content ''
+		position absolute
+		top 0
+		right 0
+		bottom 0
+		margin auto
+		height 100%
+		width 45px
+		background: linear-gradient(to left, #FFF, rgba(255,255,255, 0.85))
+		z-index 1
+
+	input
+		position relative
+		display block
+		width 100%
+		padding 0 10px
+		font-size 24px
+		line-height 1.5
+		font-family: $font-family-default
+		background-color #FFF
+		border none
+		box-sizing border-box
+		z-index 1
+		&:focus
+			outline none
+
+	button
+		position absolute
+		width 25px
+		height 25px
+		top 0
+		right 10px
+		bottom 0
+		margin auto
+		font-size 24px
+		border none
+		background-color transparent
+		cursor pointer
+		opacity .4
+		transition all .2s
+		z-index 2
+		&:focus
+		&:hover
+			outline none
+			opacity 1
+
+		svg
+			position absolute
+			top 0
+			left 0
+			right 0
+			bottom 0
+			margin auto
+
+
+// google places autocomplete dropdown
+.pac
+	&-container
+		box-shadow 1px 3px 10px #111
+		border-radius 0
+		z-index 0
+		&:after
+			display none
+
+	&-item
+		padding 0 5px
+
+	&-item-query
+		font-size 17px
+		padding-left 6px
+		padding-right 5px
+		color #111
+
+	&-matched
+		font-size 17px
+		font-weight normal
+
+	&-icon
+		display none	

@@ -1,4 +1,4 @@
-# react-forecast
+# react-forecast(https://nextgtrgod.github.io/react-forecast/)
 ### Weather forecast widget on react.js
 
 * [React.js](https://facebook.github.io/react/)
@@ -8,17 +8,10 @@
 
 ![react-forecast app screenshot](https://image.ibb.co/eRaKma/react_forecast_screen.jpg)
 
+[DEMO](https://nextgtrgod.github.io/react-forecast/)
 
 
-#### Todo
-- [x] animated background
-- [x] autocomplete on search input
+### Todo
+- [x] google places autocomplete on search
 - [x] ru/en
-- [ ] language autodetect
-- [ ] svg to react component
-- [ ] mobile version without animated background
-- [ ] localStorage caching (use Open Weather Map API no more than once an hour)
-- [ ] color theme
-- [ ] use system fonts
-- [ ] no geolocation allowed at app start scenario error: _lat is not defined_
-- [ ] ReactCSSTransitionGroup
+- [x] language autodetect

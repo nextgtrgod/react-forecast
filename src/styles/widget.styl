@@ -1,0 +1,75 @@
+
+.widget
+	display flex
+	min-width 100%
+	color $color-text-add
+	background: linear-gradient(to right, #009ccb, rgba(0, 246, 46, 0.95))
+	box-shadow 1px 3px 10px #111
+	animation fade-in .4s forwards
+	&>*
+		flex 1 1 auto
+
+
+	&__inner
+		position relative
+		padding 10px
+		margin 15px auto
+
+		&:nth-of-type(1)
+			flex-basis 40%
+			display flex
+			flex-direction column
+			justify-content space-between
+			align-items center
+			padding 0 10px 0 0
+			.icon
+				font-size 95px
+				color #FFF
+				text-shadow 1px 2px 1px #212121
+			p
+				width 100%
+				text-align right
+			&:after
+				content ''
+				position absolute
+				top 0
+				right 0
+				bottom 0
+				margin auto
+				height 100%
+				width 1px
+				border-right: 1px dashed $color-text-main
+
+		&:nth-of-type(2)
+			flex-basis 20%
+			.temp
+				font-size 75px
+				line-height 1.1
+				font-weight bold
+			.temp-range
+				font-size 21px
+
+		&:nth-of-type(3)
+			flex-basis 40%
+			p
+				font-size 21px
+				line-height 1.5
+				span
+					&:not(.icon)
+						font-size 14px
+			i
+				width 30px
+				margin-right 5px
+				text-align center
+
+.icon
+	display inline-block
+	vertical-align top
+	font-size 24px
+
+
+
+p.status
+	font-size 16px
+	font-weight 700
+	text-align right

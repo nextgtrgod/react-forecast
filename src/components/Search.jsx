@@ -9,49 +9,37 @@ class Search extends React.Component {
 			lat: '',
 			lng: ''
 		}
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleFocus = this.handleFocus.bind(this);
 	}
 
 	componentDidMount() {
 		let input = document.getElementById('autocomplete');
-		console.log('found input: ' + input);
 
 		let autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
 
   		google.maps.event.addListener(autocomplete, 'place_changed', () => {
 			let place = autocomplete.getPlace();
 
+			let lat = place.geometry.location.lat();
+			let lng = place.geometry.location.lng();
+
 			this.setState({
-				lat: place.geometry.location.lat(),
-				lng: place.geometry.location.lng()
+				lat,
+				lng
 			});
 
-			if(lat && lng) {
-				this.props.onSubmit(lat, lng);
-			};
-
-			// console.log(place + '\n' + place.geometry.location.lat() + ' -- ' + place.geometry.location.lng());
+			this.props.onSubmit(lat, lng);
       	});
 	}
 
-
-	handleSubmit(event) {
+	handleSubmit = event => {
 		event.preventDefault();
 
-		let lat = this.state.lat;
-		let lng = this.state.lng;
-
-		if(lat && lng) {
+		if(this.state.lat && this.state.lng) {
 			this.props.onSubmit(lat, lng);
 		}
 	}
 
-
-	handleFocus(event) {
-		event.currentTarget.select();
-	}
-
+	handleFocus = event => event.currentTarget.select();
 
 	render() {
 		return (

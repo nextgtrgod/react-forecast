@@ -15,8 +15,6 @@ function parseData(data, lang = 'en') {
 		}
 	};
 	
-	console.log(data);
-	
 	let weatherData = [];
 
 	data.list.forEach(item => {

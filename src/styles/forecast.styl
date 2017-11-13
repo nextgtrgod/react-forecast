@@ -1,0 +1,63 @@
+
+.forecast
+	display flex
+	justify-content space-between
+	&__item
+		position relative
+		width 100%
+		flex 1 1 auto
+		flex-basis: calc(20% - 10px)
+		margin 10px 10px 0 0
+		padding 5px
+		text-align right
+		background-color: alpha($color-bg-main, .95)
+		opacity 0
+		animation fade-in .4s forwards
+		&:before // shadow fix in firefox
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			bottom 0
+			z-index -1
+			box-shadow 1px 3px 10px #111
+
+		&:last-of-type
+			margin-right 0
+		
+		&:nth-of-type(2)
+			animation-delay .2s
+		&:nth-of-type(3)
+			animation-delay .3s
+		&:nth-of-type(4)
+			animation-delay .4s
+		&:nth-of-type(5)
+			animation-delay .5s
+		
+		p
+			&.weekday
+				position absolute
+				font-weight bold
+				font-size 21px
+				top 10px
+				left 5px
+
+			&.date
+				position absolute
+				font-size 14px
+				top 35px
+				left 5px
+				span
+					font-size 12px
+
+			&.temp-range
+				font-size 21px
+				font-weight bold
+
+		.icon
+			font-size 25px
+			height 45px
+			margin-bottom 5px
+			color #FFF
+			text-shadow 1px 1px 1px #212121
