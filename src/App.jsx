@@ -32,10 +32,11 @@ class App extends React.Component {
 			});
 		}
 	}
-
 	
 	getWeatherData = (value, searchBy) => {
-		let url = `https://api.openweathermap.org/data/2.5/forecast?` +
+		let protocol = (process.env.NODE_ENV === 'production') ? 'https' : 'http';
+
+		let url = `${protocol}://api.openweathermap.org/data/2.5/forecast?` +
 					`&lang=${this.state.lang}` +
 					`&units=metric` +
 					`&appid=${apiKey}`;
@@ -60,7 +61,6 @@ class App extends React.Component {
 		});
 	}
 
-
 	handleSearchSubmit = (lat, lng) => {
 		if((lat !== this.state.lat) || (lng !== this.state.lng)) {
 			this.setState({
@@ -70,7 +70,6 @@ class App extends React.Component {
 			this.getWeatherData({latitude: lat, longitude: lng});
 		}
 	}
-
 
 	render() {
 		return [

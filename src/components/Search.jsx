@@ -35,7 +35,7 @@ class Search extends React.Component {
 		event.preventDefault();
 
 		if(this.state.lat && this.state.lng) {
-			this.props.onSubmit(lat, lng);
+			this.props.onSubmit(this.state.lat, this.state.lng);
 		}
 	}
 
